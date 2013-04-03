@@ -48,6 +48,49 @@ This time, we used `join-params` for getting the partial application of `getJSON
 [join-params](http://npm.im/join-params) is a fork of [new-partial](http://npm.im/new-partial)
 that lets you join the parameters in a single, formatted parameter. See its docs for details.
 
+Now we have the list of users and a singular user implementation. We'll use partial and [map](http://npm.im/users) together to
+define the plural form of `user`;
+
+```js
+var map = require('map');
+
+var users = partial(map, user);
+```
+
+At this step, we have user ids and a collection that implemens group of users. All we need is to combine these two together, using
+a function composition library, [comp](http://npm.im/comp):
+
+```js
+var comp = require('comp');
+
+var allUsers = comp(userIds, users);
+
+allUsers(function(error, allUsers){
+        
+        allUses[0].name, allUsers[2].age
+        // => Smith, 23
+        
+})
+
+```
+
+Another example, partial application of `users` ?
+
+```js
+var adminIds = [3, 7, 9];
+var admins = partial(users, adminIds);
+
+admins(function(error, admins){
+        
+        admins[0].name, admins[1].age
+        // => "Smith", 21
+        
+})
+```
+
+Until this point, we're able to get all users with their data excluding posts and photos, since they require
+separate API calls.
+
 ===============================
 
 Dependencies:
