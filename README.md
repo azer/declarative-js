@@ -11,7 +11,7 @@ have my code more declarative.
 /posts/11.json
     { id: 11, title: "Hello World", content: "lorem ipsum sit dolor amet" }
     
-/photos/$19.json
+/photos/19.json
     { id: 19, path: "http://photos.foobar.com/19.jpg" }
 ```
 
