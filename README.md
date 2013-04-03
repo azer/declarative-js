@@ -3,21 +3,16 @@ have my code more declarative.
 
 ```
 /users.json
-
     [3, 7, 19, 23, 27]
     
 /users/{3, 7, 19, 23, 27}.json
-
     { name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] }
     
 /posts/$id.json
-
     { title: "Hello World", content: "lorem ipsum sit dolor amet" }
     
 /photos/$id.json
-
     { path: "http://photos.foobar.com/$id.jpg" }
-
 ```
 
 ```js
