@@ -18,7 +18,7 @@ have my code more declarative.
 Dependencies:
 
 ```js
-var comp       = require('comp'),
+var andThen    = require('andthen'),
     getJSON    = require('get-json'),
     joinParams = require('join-params')
     map        = require('map'),
@@ -28,18 +28,22 @@ var comp       = require('comp'),
 Implementation:
 
 ```js
-var getUserIds    = partial(getJSON, '/users.json'),
+var getUserIds      = partial(getJSON, '/users.json'),
 
-    getUser       = joinParams(getJSON, '/users/{0}.json'),
-    getUsers      = partial(map, getUser),
+    getUser         = joinParams(getJSON, '/users/{0}.json'),
+    getUsers        = partial(map, getUser),
     
-    getAllUsers   = comp(getUserIds, getUsers),
+    getAllUsers     = andThen(getUserIds, getUsers),
     
-    getPost       = joinParams(getJSON, '/posts/{0}.json'),
-    getPosts      = partial(map, getPost),
+    getPost         = joinParams(getJSON, '/posts/{0}.json'),
+    getPosts        = partial(map, getPost),
     
-    getPhoto      = joinParams(getJSON, '/photos/{0}.json'),
-    getPhotos     = partial(map, getPhoto);
+    getPhoto        = joinParams(getJSON, '/photos/{0}.json'),
+    getPhotos       = partial(map, getPhoto);
+    
+    getProfile      = andThen(getUser, 'posts', getPosts, 'photos', getPhotos),
+    getProfiles     = partial(map, getProfile),
+    getAllProfiles  = andThen(getUserIds, getProfiles);
 ```
 
 Usage:
@@ -47,9 +51,17 @@ Usage:
 ```js
 getUser(3, function(error, user){
     
-    user.name, user.age
-    // => smith, 21
+    user.name, user.age, user.posts, user.photos
+    // => smith, 21, [3, 11, 12], [19, 23, 39]
 
+})
+```
+
+```js
+getProfile(3, function(error, profile){
+    
+    profile.name, profile.posts[0].title, profile.photos[0].path
+    // => smith, Hello World, http://photos.foobar.com/19.jpg
 })
 ```
 
@@ -59,8 +71,20 @@ getAllUsers(function(error, users){
     users.length
     // => 5
     
-    users[1].name, uses[1].age
-    // => smith, 21
+    users[1].name, users[1].age, users[1].posts, users[1].photos
+    // => smith, 21,  [3, 11, 12], [19, 23, 39]
+    
+})
+```
+
+```js
+getAllProfiles(function(error, profiles){
+    
+    profiles.length
+    // => 5
+    
+    profiles[1].name, profiles[1].posts[0].title, profiles[1].photos[0].path
+    // => smith, Hello World, http://photos.foobar.com/19.jpg
     
 })
 ```
