@@ -5,7 +5,8 @@ This repository demonstrates how do I benefit from
 [functional](http://npm.im/map)
 [programming](http://npm.im/comp)
 [modules](http://npm.im/and-then) to 
-have my code more declarative and readable.
+have my code more declarative and readable. The final code is available as
+[example.js](https://github.com/azer/declarative-js/blob/master/example.js)
 
 The goal of the example code here will be defining **one value** that gives us all the user profiles provided by an API with following end-points:
 
