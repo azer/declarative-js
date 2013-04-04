@@ -82,8 +82,8 @@ var admins = partial(users, adminIds);
 
 admins(function(error, admins){
         
-        admins[0].name, admins[1].age
-        // => "Smith", 21
+        admins[0].name, admins[1].age, admins[1].photos
+        // => "Smith", 21, [7, 13, 37, 43]
         
 })
 ```
@@ -91,37 +91,61 @@ admins(function(error, admins){
 Until this point, we're able to get all users with their data excluding posts and photos, since they require
 separate API calls.
 
-===============================
-
-Dependencies:
+Let's define `posts` and `photos`, as well.
 
 ```js
-var andThen    = require('andthen'),
-    getJSON    = require('get-json'),
-    joinParams = require('join-params')
-    map        = require('map'),
-    partial    = require('new-partial');
+var post   = joinParams(getJSON, "/posts/{0}.json"),
+    posts  = partial(map, post),
+    
+    photo  = joinParams(getJSON, post),
+    photos = partial(map, photo);
 ```
 
-Implementation:
+Now we can combine these together and define a value that has everything (posts, photos) about a `user`.
 
-<a name="impl"></a>
+I'll call the new value as `profile`. And we'll use a function composition library called [andthen](http://npm.im/andthen)
+to combine `user`, `posts` and `photos` values:
+
 ```js
-var userIds      = partial(getJSON, '/users.json'),
+var andThen = require('andthen');
 
-    user         = joinParams(getJSON, '/users/{0}.json'),
-    users        = partial(map, getUser),
-    
-    allUsers     = andThen(getUserIds, getUsers),
-    
-    post         = joinParams(getJSON, '/posts/{0}.json'),
-    posts        = partial(map, getPost),
-    
-    photo        = joinParams(getJSON, '/photos/{0}.json'),
-    photos       = partial(map, getPhoto);
-    
-    profile      = andThen(getUser, 'posts', getPosts, 'photos', getPhotos),
-    profiles     = partial(map, getProfile),
-    allProfiles  = andThen(getUserIds, getProfiles);
+var profile = andThen(getUser, '.posts', getPosts, '.photos', getPhotos);
 ```
 
+andthen is a fork of `comp` that allows you to bind new values to properties of previous values.
+The code above will fetch user and pass the `posts` property to `getPosts`, and replace the same property with what
+`getPosts` returns. Same as `photos`.
+
+Let's define the plural define of it.
+
+```js
+var profiles     = partial(map, getProfile);
+var allProfiles  = comp(getUserIds, getProfiles);
+```
+
+Now we have everything we need. Let's show the output;
+
+```js
+allProfiles(function(error, profiles){
+        
+    if(error) throw error;
+    
+    profiles.forEach(function(profile){
+            
+            profile.name, profile.age
+            // => Smith, 21
+            
+            profile.photos[0].path
+            // =>  "http://photos.foobar.com/19.jpg"
+            
+            profile.posts[0].title
+            // => Hello World
+            
+    })
+        
+})
+```
+
+That's all. You can see the full example code in example.js on this repository.
+
+![](http://distilleryimage6.s3.amazonaws.com/b501b1409c1811e2af1622000a1fb845_7.jpg)
