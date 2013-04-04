@@ -1,4 +1,4 @@
-## Declarative JavaScript With No Callbacks Nor Promises
+## Declarative JavaScript
 
 This repository demonstrates how do I benefit from 
 [tiny](http://npm.im/new-partial) 
