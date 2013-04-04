@@ -1,22 +1,24 @@
-This repository demonstrates how do I benefit from tiny functional programming tools to 
-have my code more declarative.
+## Write Declarative JavaScript With No Callbacks Nor Promises
 
-I'll code a simple app that is supposed to fetch the following data from an ad-hoc API and list
-all of them as HTML;
+This repository demonstrates how do I benefit from 
+[tiny](http://npm.im/new-partial) 
+[functional](http://npm.im/map)
+[programming](http://npm.im/comp)
+[modules](http://npm.im/and-then) to 
+have my code more declarative and readable.
 
-```js
-// => /users.json
-        [3, 7, 19, 23, 27]
-  
-// => /users/7.json
-        { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] }
-    
-// => /posts/11.json
-        { id: 11, title: "Hello World", content: "lorem ipsum sit dolor amet" }
-    
-//  => /photos/19.json
-        { id: 19, path: "http://photos.foobar.com/19.jpg" }
+The goal of the example code here will be defining **one value** that gives us all the user profiles provided by an API with following end-points:
+
+### API
+
 ```
+=> /users.json [3, 7, 19, 23, 27]
+=> /users/7.json { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] } 
+=> /posts/11.json { id: 11, title: "Hello World", content: "lorem ipsum sit dolor amet" }
+=> /photos/19.json { id: 19, path: "http://photos.foobar.com/19.jpg" }
+```
+
+### Fetching Data
 
 Let's think about the dependencies we need; a function to query JSON API?
 
@@ -36,6 +38,8 @@ var userIds = partial(getJSON, '/users.json');
 `userIds` above is a partial application, just another async function, nothing special. It'll send a request to /users.json and
 pass you the data once you call it with a callback.
 
+### Defining Async Values
+
 Since we now have the list of users to get, let's get the user data:
 
 ```js
@@ -47,6 +51,8 @@ var user = joinParams(getJSON, "/users/{0}.json")
 This time, we used `join-params` for getting the partial application of `getJSON`. 
 [join-params](http://npm.im/join-params) is a fork of [new-partial](http://npm.im/new-partial)
 that lets you join the parameters in a single, formatted parameter. See its docs for details.
+
+### Defining Groups Of Async Values
 
 Now we have the list of users and a singular user implementation. We'll use partial and [map](http://npm.im/users) together to
 define the plural form of `user`;
@@ -103,6 +109,8 @@ var post   = joinParams(getJSON, "/posts/{0}.json"),
 
 Now we can combine these together and define a value that has everything (posts, photos) about a `user`.
 
+### Combining Values Together
+
 I'll call the new value as `profile`. And we'll use a function composition library called [andthen](http://npm.im/andthen)
 to combine `user`, `posts` and `photos` values:
 
@@ -122,6 +130,8 @@ Let's define the plural define of it.
 var profiles     = partial(map, getProfile);
 var allProfiles  = comp(getUserIds, getProfiles);
 ```
+
+### Final Value: allProfiles
 
 Now we have everything we need. Let's show the output;
 
