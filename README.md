@@ -18,7 +18,7 @@ The goal of the example code here will be defining **one value** that gives us a
 
 ### Fetching Data
 
-What do we need first; a function to query JSON API?
+What do we need first; a function to query the JSON API?
 
 ```js
 var getJSON = require('get-json');
