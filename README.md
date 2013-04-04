@@ -107,21 +107,21 @@ Implementation:
 
 <a name="impl"></a>
 ```js
-var getUserIds      = partial(getJSON, '/users.json'),
+var userIds      = partial(getJSON, '/users.json'),
 
-    getUser         = joinParams(getJSON, '/users/{0}.json'),
-    getUsers        = partial(map, getUser),
+    user         = joinParams(getJSON, '/users/{0}.json'),
+    users        = partial(map, getUser),
     
-    getAllUsers     = andThen(getUserIds, getUsers),
+    allUsers     = andThen(getUserIds, getUsers),
     
-    getPost         = joinParams(getJSON, '/posts/{0}.json'),
-    getPosts        = partial(map, getPost),
+    post         = joinParams(getJSON, '/posts/{0}.json'),
+    posts        = partial(map, getPost),
     
-    getPhoto        = joinParams(getJSON, '/photos/{0}.json'),
-    getPhotos       = partial(map, getPhoto);
+    photo        = joinParams(getJSON, '/photos/{0}.json'),
+    photos       = partial(map, getPhoto);
     
-    getProfile      = andThen(getUser, 'posts', getPosts, 'photos', getPhotos),
-    getProfiles     = partial(map, getProfile),
-    getAllProfiles  = andThen(getUserIds, getProfiles);
+    profile      = andThen(getUser, 'posts', getPosts, 'photos', getPhotos),
+    profiles     = partial(map, getProfile),
+    allProfiles  = andThen(getUserIds, getProfiles);
 ```
 
