@@ -2,7 +2,7 @@
 
 This repository demonstrates how do I benefit from 
 [tiny](http://npm.im/new-partial) 
-[functional](http://npm.im/map)
+[functional](http://npm.im/join-params)
 [programming](http://npm.im/comp)
 [modules](http://npm.im/and-then) to 
 have my code more declarative and readable. The final code is available as
