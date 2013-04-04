@@ -9,8 +9,6 @@ have my code more declarative and readable.
 
 The goal of the example code here will be defining **one value** that gives us all the user profiles provided by an API with following end-points:
 
-### API
-
 ```
 => /users.json [3, 7, 19, 23, 27]
 => /users/7.json { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] } 
@@ -20,7 +18,7 @@ The goal of the example code here will be defining **one value** that gives us a
 
 ### Fetching Data
 
-Let's think about the dependencies we need; a function to query JSON API?
+What do we need first; a function to query JSON API?
 
 ```js
 var getJSON = require('get-json');
