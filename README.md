@@ -1,11 +1,11 @@
 ## Declarative JavaScript
 
-This repository demonstrates how do I benefit from 
+This repository explains how to benefit from 
 [tiny](http://npm.im/new-partial) 
 [functional](http://npm.im/join-params)
 [programming](http://npm.im/comp)
 [modules](http://npm.im/and-then) to 
-have my code more declarative and readable. The final code is available as
+have your async JavaScript more declarative and readable. The final example code is available as
 [example.js](https://github.com/azer/declarative-js/blob/master/example.js)
 
 The goal of the example code here will be defining **one value** that gives us all the user profiles provided by an API with following end-points:
