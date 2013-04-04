@@ -105,6 +105,7 @@ var andThen    = require('andthen'),
 
 Implementation:
 
+<a name="impl"></a>
 ```js
 var getUserIds      = partial(getJSON, '/users.json'),
 
