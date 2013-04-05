@@ -5,10 +5,30 @@ This repository explains how to benefit from
 [functional](http://npm.im/join-params)
 [programming](http://npm.im/comp)
 [modules](http://npm.im/and-then) to
-have your async JavaScript more declarative and readable. The final example code is available as
-[example.js](https://github.com/azer/declarative-js/blob/master/example.js)
+have your async JavaScript more declarative and readable.
 
-The goal of the example code here will be defining **one value** that gives us all the user profiles provided by an API with following end-points:
+### Install & Run The Example Code
+
+The code example I'll be explaining is available as
+[example.js](https://github.com/azer/declarative-js/blob/master/example.js)
+on this repository. You can run it as follows;
+
+```bash
+$ git clone https://github.com/azer/declarative-js.git
+$ cd declarative-js
+$ npm install
+$ node example
+```
+
+### First Steps
+
+The goal of the example code here will be defining **one value** that gives us all the user profiles, like the below piece of code;
+
+```js
+allProfiles = andThen(userIds, profiles) // function composition of `userIds` and `profiles`
+```
+
+From provided by an API with following end-points:
 
 ```
 => /users.json [3, 7, 19, 23, 27]
@@ -25,8 +45,8 @@ What do we need first; a function to query the JSON API?
 var getJSON = require('get-json');
 ```
 
-At the first step, we need the list of users so we'll send a request to `/users.json`.
-It's a simple one, so we can do partial application on `getJSON`:
+At the first step, we need the full list of users, and will send a request to `/users.json`.
+It's a simple one, we can simply do partial application on `getJSON`:
 
 ```js
 var partial = require('new-partial');
@@ -34,7 +54,7 @@ var partial = require('new-partial');
 var userIds = partial(getJSON, '/users.json');
 ```
 
-The `userIds` above is a new function. Once you call it, it'll fetch /users.json for you;
+The `userIds` above is a new function. Once you call it, it'll fetch `/users.json` for you;
 
 ```js
 userIds(function(error, userIds){
