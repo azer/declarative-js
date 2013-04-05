@@ -34,7 +34,7 @@ From provided by an API with following end-points:
 => /users.json [3, 7, 19, 23, 27]
 => /users/7.json { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] }
 => /posts/11.json { id: 11, title: "Hello World", content: "lorem ipsum sit dolor amet" }
-=> /photos/19.json { id: 19, path: "http://photos.foobar.com/19.jpg" }
+=> /photos/19.json { id: 19, path: "/photos/19.jpg" }
 ```
 
 ### Fetching Data
