@@ -34,8 +34,18 @@ var partial = require('new-partial');
 var userIds = partial(getJSON, '/users.json');
 ```
 
-`userIds` above is a partial application, just another async function, nothing special. It'll send a request to /users.json and
-pass you the data once you call it with a callback.
+The `userIds` above is a new function. Once you call it, it'll fetch /users.json for you;
+
+```js
+userIds(function(error, userIds){
+        
+        userIds
+        // => [3, 7, 19, 23, 27]
+        
+})
+```
+
+But we won't need to call it actually. Only the definition of it is needed for us.
 
 ### Defining Async Values
 
