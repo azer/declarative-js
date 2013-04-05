@@ -7,6 +7,17 @@ This repository explains how to benefit from
 [modules](http://npm.im/and-then) to
 have your async JavaScript more declarative and readable.
 
+## Index
+
+* [Install & Run the Code Example](#install)
+* [First Steps](#first-steps)
+* [Fetching Data](#fetching-data)
+* [Defining Async Values](#async-values)
+* [Defining Async Lists](#async-lists)
+* [Combining Values](#combining-values)
+* [Final Value: allProfiles](#final-value)
+
+<a name="install"></a>
 ### Install & Run the Code Example
 
 The code example I'll be explaining is available as
@@ -20,6 +31,7 @@ $ npm install
 $ node example
 ```
 
+<a name="first-steps"></a>
 ### First Steps
 
 The goal of the example code here will be defining **one value** that gives us all the user profiles, like the below piece of code;
@@ -37,6 +49,7 @@ From an API with following end-points:
 => /photos/19.json { id: 19, path: "/photos/19.jpg" }
 ```
 
+<a name="fetching-data"></a>
 ### Fetching Data
 
 What do we need first; a function to query the JSON API?
@@ -67,6 +80,7 @@ userIds(function(error, userIds){
 
 But we won't need to call it actually. Only the definition of it is needed for us.
 
+<a name="async-values"></a>
 ### Defining Async Values
 
 Since we now have the list of users to get, we can get the user data;
@@ -81,7 +95,8 @@ This time, we used `join-params` for getting the partial application of `getJSON
 [join-params](http://npm.im/join-params) is a fork of [new-partial](http://npm.im/new-partial)
 that lets you join the parameters in a single, formatted parameter. See its docs for details.
 
-### Defining Groups Of Async Values
+<a name="async-lists"></a>
+### Defining Async Lists
 
 Now we have the list of users and a singular user implementation. We'll use partial and [map](http://npm.im/users) together to
 define the plural form of `user`;
@@ -138,6 +153,7 @@ var post   = joinParams(getJSON, "/posts/{0}.json"),
 
 Now we can combine these together and define a value that has everything (posts, photos) about a `user`.
 
+<a name="combining-values"></a>
 ### Combining Values Together
 
 I'll call the new value `profile`. And we'll use a function composition library called [andthen](http://npm.im/andthen)
@@ -160,6 +176,7 @@ var profiles     = partial(map, profile);
 var allProfiles  = comp(getUserIds, profiles);
 ```
 
+<a name="final-value"></a>
 ### Final Value: `allProfiles`
 
 Now we have everything we need. Let's show the output:
@@ -185,7 +202,7 @@ allProfiles(function(error, profiles){
 })
 ```
 
-That's all. You can see the full example code in example.js on this repository.
+That's all. Check out [the example code](#install) for more experience. Thanks for reading!
 
 ### See Also
 
