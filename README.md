@@ -84,7 +84,11 @@ But we won't need to call it actually. Only the definition of it is needed for u
 <a name="async-values"></a>
 ### Defining Async Values
 
-Since we now have the list of users to get, we can get the user data;
+The definition of an async value here is the partial application of any async function, just like the `userIds` we
+defined above.
+
+As the next step, we'll be defining `user` to get user data from the API. This will be a partial application, 
+too, except that we need to format the first parameter this time;
 
 ```js
 var joinParams = require('join-params');
@@ -92,15 +96,15 @@ var joinParams = require('join-params');
 var user = joinParams(getJSON, "/users/{0}.json")
 ```
 
-This time, we used `join-params` for getting the partial application of `getJSON`.
 [join-params](http://npm.im/join-params) is a fork of [new-partial](http://npm.im/new-partial)
 that lets you join the parameters in a single, formatted parameter. See its docs for details.
 
 <a name="async-lists"></a>
 ### Defining Async Lists
 
-Now we have the list of users and a singular user implementation. We'll use partial and [map](http://npm.im/users) together to
-define the plural form of `user`;
+Defining a list of async value means creating a new partial application of
+[map](http://github.com/azer/map.js) with the async value as first parameter.
+This abstraction will let us fetch a group of users at once;
 
 ```js
 var map = require('map');
