@@ -1,10 +1,10 @@
 ## Declarative JavaScript
 
-This repository explains how to benefit from 
-[tiny](http://npm.im/new-partial) 
+This repository explains how to benefit from
+[tiny](http://npm.im/new-partial)
 [functional](http://npm.im/join-params)
 [programming](http://npm.im/comp)
-[modules](http://npm.im/and-then) to 
+[modules](http://npm.im/and-then) to
 have your async JavaScript more declarative and readable. The final example code is available as
 [example.js](https://github.com/azer/declarative-js/blob/master/example.js)
 
@@ -12,7 +12,7 @@ The goal of the example code here will be defining **one value** that gives us a
 
 ```
 => /users.json [3, 7, 19, 23, 27]
-=> /users/7.json { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] } 
+=> /users/7.json { id: 7, name: 'Smith', age: 21, posts: [3, 11, 12], photos: [19, 23, 39] }
 => /posts/11.json { id: 11, title: "Hello World", content: "lorem ipsum sit dolor amet" }
 => /photos/19.json { id: 19, path: "http://photos.foobar.com/19.jpg" }
 ```
@@ -25,7 +25,7 @@ What do we need first; a function to query the JSON API?
 var getJSON = require('get-json');
 ```
 
-At the first step, we need the list of users so we'll send a request to `/users.json`. 
+At the first step, we need the list of users so we'll send a request to `/users.json`.
 It's a simple one, so we can do partial application on `getJSON`:
 
 ```js
@@ -38,10 +38,10 @@ The `userIds` above is a new function. Once you call it, it'll fetch /users.json
 
 ```js
 userIds(function(error, userIds){
-        
+
         userIds
         // => [3, 7, 19, 23, 27]
-        
+
 })
 ```
 
@@ -57,7 +57,7 @@ var joinParams = require('join-params');
 var user = joinParams(getJSON, "/users/{0}.json")
 ```
 
-This time, we used `join-params` for getting the partial application of `getJSON`. 
+This time, we used `join-params` for getting the partial application of `getJSON`.
 [join-params](http://npm.im/join-params) is a fork of [new-partial](http://npm.im/new-partial)
 that lets you join the parameters in a single, formatted parameter. See its docs for details.
 
@@ -81,10 +81,10 @@ var comp = require('comp');
 var allUsers = comp(userIds, users);
 
 allUsers(function(error, allUsers){
-        
+
         allUses[0].name, allUsers[2].age
         // => Smith, 23
-        
+
 })
 
 ```
@@ -96,10 +96,10 @@ var adminIds = [3, 7, 9];
 var admins = partial(users, adminIds);
 
 admins(function(error, admins){
-        
+
         admins[0].name, admins[1].age, admins[1].photos
         // => "Smith", 21, [7, 13, 37, 43]
-        
+
 })
 ```
 
@@ -111,7 +111,7 @@ Let's define `posts` and `photos`, as well.
 ```js
 var post   = joinParams(getJSON, "/posts/{0}.json"),
     posts  = partial(map, post),
-    
+
     photo  = joinParams(getJSON, post),
     photos = partial(map, photo);
 ```
@@ -126,7 +126,7 @@ to combine `user`, `posts` and `photos` values:
 ```js
 var andThen = require('andthen');
 
-var profile = andThen(getUser, '.posts', getPosts, '.photos', getPhotos);
+var profile = andThen(user, '.posts', posts, '.photos', photos);
 ```
 
 andthen is a fork of `comp` that allows you to bind new values to properties of previous values.
@@ -136,8 +136,8 @@ The code above will fetch user and pass the `posts` property to `getPosts`, and 
 Let's define the plural define of it.
 
 ```js
-var profiles     = partial(map, getProfile);
-var allProfiles  = comp(getUserIds, getProfiles);
+var profiles     = partial(map, profile);
+var allProfiles  = comp(getUserIds, profiles);
 ```
 
 ### Final Value: `allProfiles`
@@ -146,22 +146,22 @@ Now we have everything we need. Let's show the output:
 
 ```js
 allProfiles(function(error, profiles){
-        
+
     if(error) throw error;
-    
+
     profiles.forEach(function(profile){
-            
+
             profile.name, profile.age
             // => Smith, 21
-            
+
             profile.photos[0].path
             // =>  "http://photos.foobar.com/19.jpg"
-            
+
             profile.posts[0].title
             // => Hello World
-            
+
     })
-        
+
 })
 ```
 
