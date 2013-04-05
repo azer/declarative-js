@@ -1,0 +1,28 @@
+{
+  "name": "declarative-js",
+  "version": "0.0.0",
+  "description": "My take on declarative programming in JavaScript.",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/azer/declarative-js.git"
+  },
+  "keywords": [
+    "declarative",
+    "functional",
+    "guide"
+  ],
+  "author": "Azer Koculu",
+  "license": "BSD",
+  "dependencies": {
+    "andthen": "0.0.2",
+    "comp": "0.0.1",
+    "map": "0.0.0",
+    "get-json": "0.0.0",
+    "new-partial": "0.0.1",
+    "join-params": "0.0.0"
+  }
+}
