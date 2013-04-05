@@ -49,7 +49,7 @@ But we won't need to call it actually. Only the definition of it is needed for u
 
 ### Defining Async Values
 
-Since we now have the list of users to get, let's get the user data:
+Since we now have the list of users to get, we can get the user data;
 
 ```js
 var joinParams = require('join-params');
