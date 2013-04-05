@@ -187,4 +187,9 @@ allProfiles(function(error, profiles){
 
 That's all. You can see the full example code in example.js on this repository.
 
+### See Also
+
+* [By example: Continuation-passing style in JavaScript](http://matt.might.net/articles/by-example-continuation-passing-style/)
+* [Functional Programming / Eloquent JavaScript](http://eloquentjavascript.net/chapter6.html)
+
 ![](http://distilleryimage6.s3.amazonaws.com/b501b1409c1811e2af1622000a1fb845_6.jpg)
