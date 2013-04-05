@@ -62,7 +62,7 @@ var map = require('map');
 var users = partial(map, user);
 ```
 
-At this step, we have user ids and a collection that implemens group of users. All we need is to combine these two together, using
+At this step, we have user ids and a collection that implements a group of users. All we need is to combine these two together, using
 a function composition library, [comp](http://npm.im/comp):
 
 ```js
@@ -110,7 +110,7 @@ Now we can combine these together and define a value that has everything (posts,
 
 ### Combining Values Together
 
-I'll call the new value as `profile`. And we'll use a function composition library called [andthen](http://npm.im/andthen)
+I'll call the new value `profile`. And we'll use a function composition library called [andthen](http://npm.im/andthen)
 to combine `user`, `posts` and `photos` values:
 
 ```js
@@ -130,9 +130,9 @@ var profiles     = partial(map, getProfile);
 var allProfiles  = comp(getUserIds, getProfiles);
 ```
 
-### Final Value: allProfiles
+### Final Value: `allProfiles`
 
-Now we have everything we need. Let's show the output;
+Now we have everything we need. Let's show the output:
 
 ```js
 allProfiles(function(error, profiles){
