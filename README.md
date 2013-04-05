@@ -7,7 +7,7 @@ This repository explains how to benefit from
 [modules](http://npm.im/and-then) to
 have your async JavaScript more declarative and readable.
 
-### Install & Run The Example Code
+### Install & Run the Code Example
 
 The code example I'll be explaining is available as
 [example.js](https://github.com/azer/declarative-js/blob/master/example.js)
