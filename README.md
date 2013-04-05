@@ -28,7 +28,7 @@ The goal of the example code here will be defining **one value** that gives us a
 allProfiles = andThen(userIds, profiles) // function composition of `userIds` and `profiles`
 ```
 
-From provided by an API with following end-points:
+From an API with following end-points:
 
 ```
 => /users.json [3, 7, 19, 23, 27]
