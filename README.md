@@ -18,7 +18,7 @@ have your async JavaScript more declarative and readable.
 * [Final Value: allProfiles](#final-value)
 * [See Also](#see-also)
 
-<a name="install"></a>
+<a name="install"> </a>
 ### Install & Run the Code Example
 
 The code example I'll be explaining is available as
