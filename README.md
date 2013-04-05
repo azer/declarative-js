@@ -167,4 +167,4 @@ allProfiles(function(error, profiles){
 
 That's all. You can see the full example code in example.js on this repository.
 
-![](http://distilleryimage6.s3.amazonaws.com/b501b1409c1811e2af1622000a1fb845_7.jpg)
+![](http://distilleryimage6.s3.amazonaws.com/b501b1409c1811e2af1622000a1fb845_6.jpg)
