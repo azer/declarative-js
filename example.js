@@ -26,21 +26,14 @@ allProfiles(printProfiles);
 
 function printProfiles(error, profiles){
 
-  var output = [];
-
   profiles.forEach(function(profile){
-
-    output.push('',
-                '=> ' + profile.name,
-                'Posts: ' + profile.posts.map(function(p){ return p.title }).join(', '),
-                'Photos: ' + profile.photos.map(function(p){ return p.path }).join(', '));
+      
+    profile.name
+    
+    profile.posts
+    
+    profile.photos
 
   });
 
-  process.stdout.write(output.map(tab).join('\n') + '\n\n');
-
-}
-
-function tab(ln){
-  return '    ' + ln;
 }
