@@ -7,9 +7,6 @@ This repository explains how to benefit from
 [modules](http://npm.im/and-then) to
 have your async JavaScript more declarative and readable.
 
-[Hacker News Thread](https://news.ycombinator.com/item?id=5495730) |
-[Share on Twitter](http://twitter.com/home?status=http://github.com/azer/declarative-js)
-
 ## Index
 
 * [Install & Run the Code Example](#install)
