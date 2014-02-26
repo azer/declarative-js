@@ -1,4 +1,4 @@
-## Declarative JavaScript
+## Declarative Async JavaScript
 
 This repository explains how to benefit from
 [tiny](http://npm.im/new-partial)
